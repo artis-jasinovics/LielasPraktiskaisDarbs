@@ -14,9 +14,14 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+			$table->longText('Review');
+			$table->string('registration',8)->nullable();
             $table->timestamps();
         });
+		Schema::table('reviews', function(Blueprint $table) {
+		$table->foreign('registration')->references('registration')->on('cars')->onUpdate('CASCADE')->onDelete('CASCADE');
+    });
     }
 
     /**
