@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
-*/
 
 Route::resource('cars', 'CarController');
 
@@ -25,3 +24,7 @@ Route::resource('owners', 'UserController');
 Route::resource('reviews', 'ReviewController');
 
 Route::resource('rents', 'RentController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
