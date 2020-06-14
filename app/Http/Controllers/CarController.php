@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -13,7 +15,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('cars.index');
+		$car=Car::all();
+        return view('cars.index',compact('car'));
     }
 
     /**
@@ -23,7 +26,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return view('cars.create');
     }
 
     /**
@@ -34,7 +37,16 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'registration' => 'required',
+            'model' => 'required',
+			'series' => 'required'
+        ]);
+
+        Car::create($request->all());
+
+        return redirect()->route('cars.index')
+                            ->with('success', 'New Car Created Successfully!');
     }
 
     /**
@@ -43,9 +55,9 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Car $car)
     {
-        //
+        return view('cars.show', compact('car'));
     }
 
     /**
@@ -54,9 +66,9 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Car $car)
     {
-        //
+        return view('cars.edit', compact('car'));
     }
 
     /**
@@ -66,9 +78,18 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Car $car)
     {
-        //
+        $request->validate([
+            'registration' =>'required',
+            'model' =>'required',
+			'series' =>'required'
+        ]);
+
+        $car->update($request->all());
+
+        return redirect()->route('cars.index')
+                            ->with('success', 'Car Updated Successfully!');
     }
 
     /**
@@ -77,8 +98,11 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Car $car)
     {
-        //
+         $car->delete();
+
+        return redirect()->route('cars.index')
+                            ->with('success', 'Car Deleted Successfully!');
     }
 }
