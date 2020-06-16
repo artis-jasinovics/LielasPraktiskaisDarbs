@@ -31,7 +31,8 @@
 				<td> {{ $cars->series }} </td>
 				<td>
 					<form action="{{ route('cars.destroy', $cars->registration) }}" method="POST">
-						<a class="btn btn-info" href="{{ route('cars.show', $cars->registration) }}">Show</a>
+						<a class="btn btn-warning" href="{{ route('rents.create', $cars->registration) }}">Rent this car!</a>
+						<a class="btn btn-info " href="{{ route('cars.show', $cars->registration) }}">Show info</a>
 						<a class="btn btn-primary" href="{{ route('cars.edit', $cars->registration) }}">Edit</a>
 						@csrf
 						@method('DELETE')

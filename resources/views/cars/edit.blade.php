@@ -23,7 +23,7 @@
 		</div>
 	@endif
 
-	<form action="{{ route('cars.update', $car->registration) }}" method="POST">
+	<!--<form action="{{ route('cars.update', $car->registration) }}" method="POST">
 		@csrf
 		@method("PUT")
 		<div class="row">
@@ -53,5 +53,34 @@
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</div>
-	</form>
-@endsection
+	</form> -->
+	{{ Form::open(['action' =>['CarController@update', $car->registration],'method' => 'put']) }}
+<div>
+{{ Form::label('registration', 'Registration') }}
+{{ Form::text('registration', $car->registration) }}
+</div>
+<div>
+{{ Form::label('model', 'Model') }}
+{{ Form::text('model', $car->model) }}
+</div>
+<div>
+{{ Form::label('series', 'Series') }}
+{{ Form::text('series',$car->series) }}
+</div>
+<div>
+{{ Form::label('produced_on', 'Produced On') }}
+{{ Form::date('produced_on', $car->produced_on) }}
+</div>
+<div>
+{{ Form::label('full_mass', 'Mass (kg)') }}
+{{ Form::number('full_mass', $car->full_mass) }}
+</div>
+<div>
+{{ Form::label('fuel_consumption', 'Fuel Consumption (l/100km)') }}
+{{ Form::number('fuel_consumption', $car->fuel_consumption) }}
+</div>
+<div>
+</div>
+{{ Form::submit('Save') }}
+{{ Form::close() }}
+	@endsection

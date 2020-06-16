@@ -38,11 +38,15 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'registration' => 'required',
-            'model' => 'required',
-			'series' => 'required'
+            'registration' => 'required|min:2|max:8',
+            'series' => 'required|min:0|max:191',
+			'model' => 'required|min:1|max:191',
+			'produced_on' => 'date|min:2|max:191',
+			'full_mass' => 'integer|min:1|max:500000',
+			'fuel_consumption' => 'between:0,99.99|min:0|max:4',
+			'owner_id' => 'integer|min:2|max:191'
         ]);
-
+		
         Car::create($request->all());
 
         return redirect()->route('cars.index')
@@ -81,11 +85,15 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $request->validate([
-            'registration' =>'required',
-            'model' =>'required',
-			'series' =>'required'
+			'registration' => 'required|min:2|max:8',
+            'series' => 'required|min:0|max:191',
+			'model' => 'required|min:1|max:191',
+			'produced_on' => 'date|min:2|max:191',
+			'full_mass' => 'integer|min:1|max:5',
+			'fuel_consumption' => 'between:0,99.99|min:0|max:4',
+			'owner_id' => 'unsigned_integer|min:2|max:191'
         ]);
-
+		
         $car->update($request->all());
 
         return redirect()->route('cars.index')

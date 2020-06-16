@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Rent;
+
 class RentController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class RentController extends Controller
      */
     public function index()
     {
-        //
+       	$rent=Rent::all();
+        return view('rents.index',compact('rent'));
     }
 
     /**
@@ -23,7 +26,7 @@ class RentController extends Controller
      */
     public function create()
     {
-        //
+         return view('rents.create');
     }
 
     /**
@@ -34,7 +37,14 @@ class RentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'rented_from' => 'required|date',
+            'rented_to' => 'required|date'
+        ]);
+		
+        Rent::create($request->all());
+
+        return redirect()->route('rents.index')->with('success', 'New Car Created Successfully!');
     }
 
     /**
@@ -43,9 +53,9 @@ class RentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Rent $rent)
     {
-        //
+        return view('rents.show', compact('rent'));
     }
 
     /**
@@ -54,9 +64,9 @@ class RentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Rent $rent)
     {
-        //
+        return view('rents.edit', compact('rent'));
     }
 
     /**
@@ -66,9 +76,18 @@ class RentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Rent $rent)
     {
-        //
+        $request->validate([
+            'rented_from' => 'required|date',
+            'rented_to' => 'required|date'
+        ]);
+		
+        $rent->update($request->all());
+
+        return redirect()->route('rents.index')
+                            ->with('success', 'Rent Updated Successfully!');
+  
     }
 
     /**
@@ -77,8 +96,11 @@ class RentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Rent $rent)
     {
-        //
+        $rent->delete();
+
+        return redirect()->route('rents.index')
+                            ->with('success', 'Car Deleted Successfully!');
     }
 }

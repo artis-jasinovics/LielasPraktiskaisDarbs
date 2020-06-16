@@ -22,56 +22,35 @@
 			</ul>
 		</div>
 	@endif
-
-	<form action="{{ route('cars.store') }}" method="POST">
 		@csrf
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="form-group">
-					<strong>Registration:</strong>
-					<input type="text" name="Registration" class="form-control" placeholder="Registration">
-				</div>
-			</div>
 
-			<div class="col-lg-12">
-				<div class="form-group">
-					<strong>Model:</strong>
-					<input type="text" name="Model" placeholder="Model" class="form-control">
-				</div>
-			</div>
-			
-			<div class="col-lg-12">
-				<div class="form-group">
-					<strong>Series:</strong>
-					<input type="text" name="Series" placeholder="Series" class="form-control">
-				</div>
-			</div>
-
-			<div class="col-lg-12">
-				<div class="form-group">
-					<strong>Production year:</strong>
-					<input type="date" name="Production year" placeholder="Production year" class="form-control">
-				</div>
-			</div>			
-
-			<div class="col-lg-12">
-				<div class="form-group">
-					<strong>Mass (Kg):</strong>
-					<input type="number" name="Mass" placeholder="Mass" class="form-control">
-				</div>
-			</div>
-			
-			<div class="col-lg-12">
-				<div class="form-group">
-					<strong>Fuel Consumption (l/km):</strong>
-					<input type="floatval" name="Fuel Consumption" placeholder="Fuel Consumption" class="form-control">
-				</div>
-			</div>			
-
-			<div class="col-lg-12">
-				
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-		</div>
-	</form>
+{{ Form::open(['action' =>['CarController@store'],'method' => 'post']) }}
+<div>
+{{ Form::label('registration', 'Registration') }}
+{{ Form::text('registration') }}
+</div>
+<div>
+{{ Form::label('model', 'Model') }}
+{{ Form::text('model') }}
+</div>
+<div>
+{{ Form::label('series', 'Series') }}
+{{ Form::text('series') }}
+</div>
+<div>
+{{ Form::label('produced_on', 'Produced On') }}
+{{ Form::date('produced_on') }}
+</div>
+<div>
+{{ Form::label('full_mass', 'Mass (kg)') }}
+{{ Form::number('full_mass') }}
+</div>
+<div>
+{{ Form::label('fuel_consumption', 'Fuel Consumption (l/100km)') }}
+{{ Form::number('fuel_consumption') }}
+</div>
+<div>
+</div>
+{{ Form::submit('Save') }}
+{{ Form::close() }}
 @endsection
