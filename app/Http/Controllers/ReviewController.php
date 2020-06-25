@@ -23,7 +23,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        return view('reviews.create');
     }
 
     /**
@@ -34,7 +34,13 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $request->validate([
+            'review' => 'required',
+        ]);
+		
+        Rent::create($request->all());
+
+        return redirect()->route('reviews.show')->with('success', 'New review added Successfully!');
     }
 
     /**
@@ -43,9 +49,9 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Review $review)
     {
-        //
+         return view('reviews.show', compact('review'));
     }
 
     /**
@@ -54,9 +60,9 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Review $review)
     {
-        //
+        return view('reviews.edit', compact('review'));
     }
 
     /**
@@ -66,9 +72,16 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Review $review)
     {
-        //
+             $request->validate([
+			'review' => 'required',
+        ]);
+		
+        $review->update($request->all());
+
+        return redirect()->route('reviews.show')
+                            ->with('success', 'Review updated Successfully!');
     }
 
     /**
@@ -77,8 +90,11 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Review $review)
     {
-        //
+        $review->delete();
+
+        return redirect()->route('reviews.show')
+                            ->with('success', 'Review Deleted Successfully!');
     }
 }

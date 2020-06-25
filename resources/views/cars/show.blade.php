@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="pull-left">
-				<h3> Show Car </h3>
+				<h3> Showing selected car info </h3>
 			</div>
 			<div class="pull-right">
 				<a class="btn btn-success" href="{{ route('cars.index') }}"> Back to Car List </a>
@@ -32,7 +32,7 @@
 					<strong>Series:</strong>
 					{{ $car->series }}
 				</div>
-				
+			</div>	
 			<div class="col-lg-12">
 				<div class="form-group">
 					<strong>Production year:</strong>
@@ -53,5 +53,8 @@
 					{{ $car->fuel_consumption }}
 				</div>
 			</div>			
+	</div>
+	<div class="row">
+	<a class="btn btn-success" href="{{ route('reviews.show',$car->registration) }}"> See all reviews </a>
 	</div>
 @endsection

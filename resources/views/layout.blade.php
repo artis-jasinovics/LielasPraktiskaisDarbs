@@ -18,6 +18,7 @@
     <a href="{{ url('/cars') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Car listings</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Profiles</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">My cars</a>
+	<a href="{{ url('/rents') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Current rentals</a>
   </div>
 	<div class="container">
 		@yield('content')
