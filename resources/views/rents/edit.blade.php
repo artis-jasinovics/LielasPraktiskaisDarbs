@@ -14,19 +14,19 @@
 		</div>
 	@endif
 
-	<table class="table table-bordered">
-		<tr>
-			<th> No </th>
-			<th> Model </th>
-			<th> Series</th>
-		</tr>
-		@foreach($cars as $key => $cars)
-			<tr>
-				<td> {{ $cars->registration }} </td>			
-				<td> {{ $cars->model }} </td>
-				<td> {{ $cars->series }} </td>
-				 
-			</tr>
-		@endforeach
-	</table>
+{{ Form::open(['action' =>['RentController@update', $rent->id],'method' => 'put']) }}
+<div>
+{{ Form::label('registration', 'Registration') }}
+{{ Form::text('registration', $rent->registration) }}
+</div>
+<div>
+{{ Form::label('rented_from', 'Rented From') }}
+{{ Form::date('rented_from', $rent->rented_from) }}
+</div>
+<div>
+{{ Form::label('rented_to', 'Rented Until') }}
+{{ Form::date('rented_to',$rent->rented_to) }}
+</div>
+{{ Form::submit('Save') }}
+{{ Form::close() }}
 @endsection

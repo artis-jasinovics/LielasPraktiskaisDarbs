@@ -16,16 +16,25 @@
 
 	<table class="table table-bordered">
 		<tr>
-			<th> No </th>
-			<th> Model </th>
-			<th> Series</th>
+			<th> From: </th>
+			<th> To: </th>
+			<th> Car: </th>
+			<th> Options: </th>
 		</tr>
-		@foreach($cars as $key => $cars)
+		@foreach($rent as $key => $rent)
 			<tr>
-				<td> {{ $cars->registration }} </td>			
-				<td> {{ $cars->model }} </td>
-				<td> {{ $cars->series }} </td>
-				 
+				<td> {{ $rent->rented_from }} </td>			
+				<td> {{ $rent->rented_to }} </td>
+				 <td> {{ $rent->registration }} </td>
+				 <td>
+				 <form action="{{ route('rents.destroy', $rent->id) }}" method="POST">
+						<a class="btn btn-info " href="{{ route('cars.show', $rent->registration) }}">Show info</a>
+						<a class="btn btn-primary" href="{{ route('rents.edit', $rent->id) }}">Edit</a>
+						@csrf
+						@method('DELETE')
+						<button type="submit" class="btn btn-danger">Delete</button>
+					</form>
+					</td>
 			</tr>
 		@endforeach
 	</table>

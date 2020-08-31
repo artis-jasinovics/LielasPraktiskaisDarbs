@@ -26,7 +26,7 @@ class RentController extends Controller
      */
     public function create()
     {
-         return view('rents.create');
+		return view('rents.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class RentController extends Controller
 		
         Rent::create($request->all());
 
-        return redirect()->route('rents.show')->with('success', 'New Car rental Created Successfully!');
+        return redirect()->route('rents.index')->with('success', 'New Car rental Created Successfully!');
     }
 
     /**
@@ -85,7 +85,7 @@ class RentController extends Controller
 		
         $rent->update($request->all());
 
-        return redirect()->route('rents.show')
+        return redirect()->route('rents.index')
                             ->with('success', 'Rent Updated Successfully!');
   
     }
@@ -100,7 +100,7 @@ class RentController extends Controller
     {
         $rent->delete();
 
-        return redirect()->route('rents.show')
+        return redirect()->route('rents.index')
                             ->with('success', 'Car Deleted Successfully!');
     }
 }
