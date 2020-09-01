@@ -6,7 +6,12 @@ use App\Review;
 
 use Illuminate\Http\Request;
 
-class ReviewController extends ControllerA
+use DB;
+
+class ReviewController extends Controller
+
+
+
 {
     /**
      * Display a listing of the resource.
@@ -23,9 +28,9 @@ class ReviewController extends ControllerA
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('reviews.create');
+        return view('reviews.create',compact('id'));
     }
 
     /**
@@ -37,7 +42,7 @@ class ReviewController extends ControllerA
     public function store(Request $request)
     {
             $request->validate([
-            'review' => 'required',
+            'Review' => 'required',
         ]);
 		
         Rent::create($request->all());
@@ -51,9 +56,10 @@ class ReviewController extends ControllerA
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show($id)
     {
-         return view('reviews.show', compact('review'));
+		$result = DB::table('reviews')->where('registration', $id)->get();
+         return view('reviews.show', compact('result'));
     }
 
     /**

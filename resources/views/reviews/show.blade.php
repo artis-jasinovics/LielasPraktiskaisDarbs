@@ -3,27 +3,29 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="pull-left">
-				<h3> Showing selected car info </h3>
+				<h3> Showing reviews for car '{{$result[0]->registration}}' </h3>
 			</div>
 			<div class="pull-right">
-				<a class="btn btn-success" href="{{ route('cars.index') }}"> Back to Car </a>
+				<a class="btn btn-success" href="{{ route('cars.show', $result[0]->registration)  }}"> Back to Car </a>
+			</div>
+			<div class="pull-right">
+				<a class="btn btn-success" href="{{ url('review/create', $result[0]->registration)  }}"> Leave a review! </a>
 			</div>
 		</div>
 	</div>
 
-@foreach ($revs as $key->$reviews)
+@foreach ($result as $key=>$reviews)
 	<div class="row">
 			<div class="col-lg-12">
 				<div class="form-group">
-					<strong>Registration:</strong>
-					{{ $revs->registration }}
+					<strong>C:</strong>
+					{{ $reviews->created_at }}
 				</div>
 			</div>
 
-			<div class="col-lg-12">
+			<div class="col-lg-12 border">
 				<div class="form-group">
-					<strong>Model:</strong>
-					{{ $revs->Review }}
+					"{{ $reviews->Review }}"
 				</div>
 			</div>
 	</div>

@@ -28,3 +28,5 @@ Route::resource('rents', 'RentController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('reviews/create/{id}', 'ReviewController@create');
