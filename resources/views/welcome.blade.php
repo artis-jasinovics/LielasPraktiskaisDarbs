@@ -20,24 +20,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href={{ url('/') }} class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
     <a href="{{ url('/cars') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Car listings</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Profiles</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">My cars</a>
+    <a href="{{ url('/rents') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Current rentals</a>
   </div>
 
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
-  </div>
-</div>
 
 <!-- Header -->
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">CARRENT</h1>
   <p class="w3-xlarge">A website by Artis</p>
-  <a href={{ url('/login') }} class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Create an account now</a>
+  <a href={{ url('/login') }} class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Create an account/log in.</a>
 </header>
 
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">

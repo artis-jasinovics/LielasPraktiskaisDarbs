@@ -4,10 +4,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="pull-left">
-				<h3> Add New Car </h3>
+				<h3> Add review for Car </h3>
 			</div>
 			<div class="pull-right">
-				<a class="btn btn-success" href="{{ route('cars.index') }}"> Back to Car List</a>
+				<a class="btn btn-success" href="{{ route('cars.show', $id) }}"> Back to Car </a>
 			</div>
 		</div>
 	</div>
@@ -35,10 +35,11 @@
 </div>
 <div class="row-lg-12">
 {{ Form::label('Review', 'Review:') }}
-{{ Form::text('Review') }}
+{{ Form::textarea('Review') }}
 </div>
 <div class="row-lg-12">
 {{ Form::submit('Save') }}
 {{ Form::close() }}
 </div>
+
 @endsection

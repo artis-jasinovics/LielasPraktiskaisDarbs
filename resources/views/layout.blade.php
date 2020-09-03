@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 	<title>Carrent</title>
@@ -16,9 +17,10 @@
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href={{ url('/') }} class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
     <a href="{{ url('/cars') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Car listings</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Profiles</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">My cars</a>
 	<a href="{{ url('/rents') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Current rentals</a>
+	@can('edit-users')
+	<a href="{{ route('admin.users.index') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white float-right">User admin </a>
+	@endcan
   </div>
 	<div class="container">
 		@yield('content')

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 use DB;
 
+use Gate;
+
+use App\Car;
+
 class ReviewController extends Controller
 
 
@@ -43,11 +47,14 @@ class ReviewController extends Controller
     {
             $request->validate([
             'Review' => 'required',
+			'registration' => 'required',
         ]);
 		
-        Rent::create($request->all());
+        Review::create($request->all());
+		
+		
 
-        return redirect()->route('reviews.show')->with('success', 'New review added Successfully!');
+        return redirect()->route('reviews.show', $request->registration)->with('success', 'New review added Successfully!');
     }
 
     /**
@@ -59,7 +66,13 @@ class ReviewController extends Controller
     public function show($id)
     {
 		$result = DB::table('reviews')->where('registration', $id)->get();
+		if($result->isEmpty()){
+			return redirect()->route('cars.show', $id);
+     
+		}
          return view('reviews.show', compact('result'));
+
+
     }
 
     /**
@@ -100,9 +113,10 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
+		$res = $review->registration;
         $review->delete();
 
-        return redirect()->route('reviews.show')
+        return redirect()->route('reviews.show',$res)
                             ->with('success', 'Review Deleted Successfully!');
     }
 }

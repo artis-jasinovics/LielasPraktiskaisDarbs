@@ -25,6 +25,10 @@
 		@csrf
 
 {{ Form::open(['action' =>['RentController@store'],'method' => 'post']) }}
+<div class="row">
+{{ Form::label('registration', 'Registration:' ) }}
+{{ Form::text('registration', $id, ['readonly']) }}
+</div>
 <div>
 {{ Form::label('rented_from', 'Rented from:') }}
 {{ Form::date('rented_from') }}

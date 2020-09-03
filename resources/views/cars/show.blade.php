@@ -55,6 +55,9 @@
 			</div>			
 	</div>
 	<div class="row">
-	<a class="btn btn-success" href="{{ route('reviews.show',$car->registration) }}"> See all reviews </a>
+	<a class="btn btn-success" href="{{ route('reviews.show', $car->registration) }}"> See all reviews </a>
+	@can('manage-users')
+	<a class="btn btn-info" href="{{ url('review/create', $car->registration)  }}"> Leave a review! </a>
+	@endcan
 	</div>
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Car;
 
+use Gate;
+
 use Illuminate\Http\Request;
 
 class CarController extends Controller

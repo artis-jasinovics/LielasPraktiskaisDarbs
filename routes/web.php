@@ -19,14 +19,22 @@ Route::get('/', function () {
 
 Route::resource('cars', 'CarController');
 
-Route::resource('owners', 'UserController');
-
 Route::resource('reviews', 'ReviewController');
 
 Route::resource('rents', 'RentController');
+
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
+	
+Route::resource('users', 'UsersController', ['except'=> ['show','create','store']]);
+
+});
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('reviews/create/{id}', 'ReviewController@create');
+Route::get('review/create/{id}', 'ReviewController@create');
+
+Route::get('rents/create/{id}', 'RentController@create');

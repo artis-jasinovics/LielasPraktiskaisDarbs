@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Rent;
 
+use Gate;
+
 class RentController extends Controller
 {
     /**
@@ -24,9 +26,9 @@ class RentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-		return view('rents.create');
+		return view('rents.create',compact('id'));
     }
 
     /**
@@ -38,12 +40,13 @@ class RentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+			'registration' => 'required|min:2|max:8',
             'rented_from' => 'required|date',
             'rented_to' => 'required|date'
         ]);
 		
         Rent::create($request->all());
-
+		
         return redirect()->route('rents.index')->with('success', 'New Car rental Created Successfully!');
     }
 
@@ -79,11 +82,13 @@ class RentController extends Controller
     public function update(Request $request, Rent $rent)
     {
         $request->validate([
+			'registration' => 'required|min:2|max:8',
             'rented_from' => 'required|date',
             'rented_to' => 'required|date'
         ]);
 		
         $rent->update($request->all());
+
 
         return redirect()->route('rents.index')
                             ->with('success', 'Rent Updated Successfully!');

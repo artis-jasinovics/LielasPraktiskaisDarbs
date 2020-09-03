@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="pull-left">
-				<h3> Available cars! </h3>
+				<h3 class= strong> Current rental agreements: </h3>
 			</div>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 			<th> From: </th>
 			<th> To: </th>
 			<th> Car: </th>
-			<th> Options: </th>
+			<th> Actions: </th>
 		</tr>
 		@foreach($rent as $key => $rent)
 			<tr>
@@ -28,12 +28,14 @@
 				 <td> {{ $rent->registration }} </td>
 				 <td>
 				 <form action="{{ route('rents.destroy', $rent->id) }}" method="POST">
-						<a class="btn btn-info " href="{{ route('cars.show', $rent->registration) }}">Show info</a>
-						<a class="btn btn-primary" href="{{ route('rents.edit', $rent->id) }}">Edit</a>
+						<a class="btn btn-info" href="{{ route('cars.show', $rent->registration) }}">Show car</a>
+						@can('manage-users')
+						<a class="btn btn-primary" href="{{ route('rents.edit', $rent->id ) }}">Edit</a>
 						@csrf
 						@method('DELETE')
 						<button type="submit" class="btn btn-danger">Delete</button>
 					</form>
+					@endcan
 					</td>
 			</tr>
 		@endforeach
